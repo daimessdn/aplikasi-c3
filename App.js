@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
@@ -8,6 +8,8 @@ import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync();
 
 import Button from './src/components/Button';
+
+import { TEXT_FORMAT_STYLE, TEXT_STYLES } from './src/styles/index';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,7 +30,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text style={{ fontFamily: "Inter-Regular", marginBottom: 12 }}>Selamat datang di Aplikasi C3</Text>
+      <Text style={{ ...TEXT_FORMAT_STYLE.HEADING_1, marginBottom: 12 }}>Selamat datang di Aplikasi C3</Text>
       <Button type="primary" text="Login" onPress={() => console.log("login disini")} />
 
       <StatusBar style="auto" />
