@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, ToastAndroid, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-import React from "react";
+import { StackActions } from "@react-navigation/native";
+
+import React, { useEffect } from "react";
 
 import { TEXT_FORMAT_STYLE } from "../styles";
 
@@ -9,7 +11,27 @@ import Button from "../components/Button";
 import ButtonGroupContainer from "../components/containers/ButtonGroupContainer";
 import ABCConsultingCompanyLogo from "../../assets/svg/ABCConsultingCompanyLogo";
 
-const HomeScreen = ({ navigation }) => {
+const WelcomeScreen = ({ navigation, route }) => {
+  const goToLoginScreen = () => {
+    navigation.dispatch(
+      StackActions.replace('Login')
+    );
+  }
+
+  const goToRegisterScreen = () => {
+    navigation.dispatch(
+      StackActions.replace('Register')
+    );
+  }
+
+  useEffect(() => {
+    if (route.params != undefined) {
+      if (route.params.message !== undefined) {
+        ToastAndroid.show(route.params.message || "", ToastAndroid.SHORT);
+      }
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" animated={true} translucent={false} />
@@ -26,13 +48,13 @@ const HomeScreen = ({ navigation }) => {
         <Button
           type="primary"
           text="Login"
-          onPress={() => navigation.navigate("Login")}
+          onPress={goToLoginScreen}
         />
 
         <Button
           type="secondary"
           text="Register"
-          onPress={() => console.log("register disini")}
+          onPress={goToRegisterScreen}
         />
       </ButtonGroupContainer>
 
@@ -46,7 +68,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+export default WelcomeScreen;
 
 const styles = StyleSheet.create({
   container: {

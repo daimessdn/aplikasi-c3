@@ -12,6 +12,7 @@ SplashScreen.preventAutoHideAsync();
 import WelcomeScreen from './src/screen/WelcomeScreen';
 import LoginScreen from './src/screen/LoginScreen';
 import RegisterScreen from './src/screen/RegisterScreen';
+import HomeScreen from './src/screen/sessions/HomeScreen';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -34,6 +35,8 @@ export default function App() {
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

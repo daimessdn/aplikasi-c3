@@ -1,9 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import React, { useState } from "react";
 
-import { StackActions } from '@react-navigation/native';
+import { StackActions } from "@react-navigation/native";
 
 import { TEXT_FORMAT_STYLE, TEXT_STYLES } from "../styles";
 
@@ -19,17 +19,27 @@ const RegisterScreen = ({ navigation }) => {
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
 
+  const register = () => {
+    if (name !== "" && email !== "" && password !== "") {
+      navigation.dispatch(StackActions.replace("Home"));
+    } else {
+      Alert.alert("Terjadi kesalahan", "Nama, alamat email, dan kata sandi harus diisi.");
+    }
+  };
+
   const goToLoginScreen = () => {
-    navigation.dispatch(
-      StackActions.replace('Register')
-    );
-  }
+    navigation.dispatch(StackActions.replace("Login"));
+  };
+
+  const goToWelcomeScreen = () => {
+    navigation.dispatch(StackActions.replace("Welcome"));
+  };
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" animated={true} translucent={false} />
 
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity onPress={goToWelcomeScreen} style={{ marginBottom: 8 }}>
         <BackIcon style={{ width: 40, height: 40 }} />
       </TouchableOpacity>
 
@@ -44,35 +54,40 @@ const RegisterScreen = ({ navigation }) => {
         <Input
           label="Nama lengkap"
           value={name}
-          onChangeText={text => changeName(text)}
+          onChangeText={(text) => changeName(text)}
           placeholder="Masukan nama lengkap"
         />
         <Input
           label="Alamat email"
           value={email}
-          onChangeText={text => changeEmail(text)}
+          onChangeText={(text) => changeEmail(text)}
           placeholder="Masukan alamat email"
+          keyboardType="email-address"
         />
         <Input
           label="Kata sandi"
           value={password}
-          onChangeText={text => changePassword(text)}
+          onChangeText={(text) => changePassword(text)}
           placeholder="Masukan kata sandi"
           secureTextEntry={true}
         />
       </View>
 
       <ButtonGroupContainer>
-        <Button
-          type="primary"
-          text="Login"
-          onPress={() => console.log("register disini")}
-        />
+        <Button type="primary" text="Login" onPress={() => register} />
       </ButtonGroupContainer>
 
-      <Text style={{ ...TEXT_STYLES.INTER_REGULAR, marginTop: 12 }}>Sudah punya akun?</Text>
-      <TouchableOpacity style={{ marginTop: 2, }} onPress={goToLoginScreen}>
-        <Text style={{ ...TEXT_STYLES.INTER_REGULAR, color: "#333533", textDecorationLine: "underline" }}>
+      <Text style={{ ...TEXT_STYLES.INTER_REGULAR, marginTop: 12 }}>
+        Sudah punya akun?
+      </Text>
+      <TouchableOpacity style={{ marginTop: 2 }} onPress={goToLoginScreen}>
+        <Text
+          style={{
+            ...TEXT_STYLES.INTER_REGULAR,
+            color: "#333533",
+            textDecorationLine: "underline",
+          }}
+        >
           Login di sini.
         </Text>
       </TouchableOpacity>
