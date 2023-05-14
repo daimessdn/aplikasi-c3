@@ -45,6 +45,6 @@ export const TEXT_FORMAT_STYLE = StyleSheet.create({
     PARAGRAPH: {
         ...TEXT_STYLES.INTER_REGULAR,
         fontSize: 14,
-        lineHeight: 18
+        lineHeight: 24
     },
 });
