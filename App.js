@@ -1,10 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Button from './src/components/Button';
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Selamat datang di Aplikasi C3</Text>
+      <Button type="primary" text="Login" onPress={() => console.log("login disini")} />
+
       <StatusBar style="auto" />
     </View>
   );
